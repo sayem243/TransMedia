@@ -1,0 +1,452 @@
+{
+	"info": {
+		"_postman_id": "7bfe66dc-cb6d-437c-94b5-74cf7ddad82d",
+		"name": "TrMedia",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "13016968"
+	},
+	"item": [
+		{
+			"name": "signin",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"\r",
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"//verify property\r",
+							"pm.test(\"Response contains a authentication\", function () {\r",
+							"    pm.expect(pm.response.json()).to.have.property(\"authentication\");\r",
+							"});\r",
+							"//verify the value\r",
+							"var jsonData = pm.response.json();\r",
+							"pm.test(\"Verify the unmail value\", function () {\r",
+							"    pm.expect(jsonData.authentication.umail).to.eql(\"sam@gmail.com\");\r",
+							"});\r",
+							"\r",
+							"\r",
+							"\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\":\"sam@gmail.com\",\r\n    \"password\":\"Password123$\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "juice-shop.herokuapp.com/rest/user/login",
+					"host": [
+						"juice-shop",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"rest",
+						"user",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add One Item",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response contains a status\", function () {\r",
+							"    pm.expect(pm.response.json()).to.have.property(\"status\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response contains a data\", function () {\r",
+							"    pm.expect(pm.response.json()).to.have.property(\"data\");\r",
+							"});\r",
+							"\r",
+							"//verify the value\r",
+							"var jsonData = pm.response.json();\r",
+							"pm.test(\"Verify the status value\", function () {\r",
+							"    pm.expect(jsonData.status).to.eql(\"success\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Verify Product quantity\", function () {\r",
+							"    pm.expect(jsonData.data.quantity).to.eql(1);\r",
+							"})\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJzdGF0dXMiOiJzdWNjZXNzIiwiZGF0YSI6eyJpZCI6NDEsInVzZXJuYW1lIjoiIiwiZW1haWwiOiJzYW1AZ21haWwuY29tIiwicGFzc3dvcmQiOiI1Y2JjZjA3ZTM2ZmUzNzE0MmI0MDdhY2UwMjExY2JmNyIsInJvbGUiOiJjdXN0b21lciIsImRlbHV4ZVRva2VuIjoiIiwibGFzdExvZ2luSXAiOiIwLjAuMC4wIiwicHJvZmlsZUltYWdlIjoiL2Fzc2V0cy9wdWJsaWMvaW1hZ2VzL3VwbG9hZHMvZGVmYXVsdC5zdmciLCJ0b3RwU2VjcmV0IjoiIiwiaXNBY3RpdmUiOnRydWUsImNyZWF0ZWRBdCI6IjIwMjMtMDQtMTIgMDU6NTQ6NDkuMjU1ICswMDowMCIsInVwZGF0ZWRBdCI6IjIwMjMtMDQtMTIgMDU6NTQ6NDkuMjU1ICswMDowMCIsImRlbGV0ZWRBdCI6bnVsbH0sImlhdCI6MTY4MTI3OTE5MCwiZXhwIjoxNjgxMjk3MTkwfQ.AmSNZnogZujlnr2tlfFH0J7rYnvpF_t_776Lnz8pkcDBMMWu9RgFp5OAPzwtzwFp9n30FbLRQ3kGZKAHeSz_z3PyKuC_BE1HuQK4goIaftkNCeTWI14ww1BGJuEzEJpnW0hL6H-Um4oPKRLhiAGPHnckQHBUCJi_1jwtahOMSjg",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"ProductId\": 24,\r\n    \"BasketId\": \"26\",\r\n    \"quantity\": 1\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://juice-shop.herokuapp.com/api/BasketItems/",
+					"protocol": "https",
+					"host": [
+						"juice-shop",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"api",
+						"BasketItems",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Verify_1_item",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const responseJson = pm.response.json();\r",
+							"pm.test(\"Status is success\", function () {\r",
+							"  pm.expect(responseJson.status).to.equal(\"success\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Product with ID 1 is in the basket\", function () {\r",
+							"  const products = responseJson.data.Products\r",
+							"  const product = products.find(p => p.id === 24);\r",
+							"  pm.expect(product).to.exist;\r",
+							"  pm.expect(product.BasketItem.quantity).to.equal(1);\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{bearerToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://juice-shop.herokuapp.com/rest/basket/6",
+					"protocol": "https",
+					"host": [
+						"juice-shop",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"rest",
+						"basket",
+						"6"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add 2 items",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response contains a status\", function () {\r",
+							"    pm.expect(pm.response.json()).to.have.property(\"status\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response contains a data\", function () {\r",
+							"    pm.expect(pm.response.json()).to.have.property(\"data\");\r",
+							"});\r",
+							"\r",
+							"//verify the value\r",
+							"var jsonData = pm.response.json();\r",
+							"pm.test(\"Verify the status value\", function () {\r",
+							"    pm.expect(jsonData.status).to.eql(\"success\");\r",
+							"});\r",
+							"pm.test(\"Verify Product quantity\", function () {\r",
+							"    pm.expect(jsonData.data.quantity).to.eql(2);\r",
+							"})"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{bearerToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"ProductId\": 6,\r\n    \"BasketId\": \"26\",\r\n    \"quantity\": 2\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://juice-shop.herokuapp.com/api/BasketItems/",
+					"protocol": "https",
+					"host": [
+						"juice-shop",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"api",
+						"BasketItems",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete 1 item",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{bearerToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"quantity\": 1\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://juice-shop.herokuapp.com/api/BasketItems/26",
+					"protocol": "https",
+					"host": [
+						"juice-shop",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"api",
+						"BasketItems",
+						"26"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Validate 1 item remaining",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"\r",
+							"var jsonData = pm.response.json();\r",
+							"pm.test(\"Status is success\", function () {\r",
+							"  pm.expect(jsonData.status).to.equal(\"success\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Verify Product Basket id\", function () {\r",
+							"    pm.expect(jsonData.data.Products[0].BasketItem.BasketId).to.eql(26);\r",
+							"})\r",
+							"\r",
+							"pm.test(\"Verify quantity is 1\", function () {\r",
+							"    pm.expect(jsonData.data.Products[0].BasketItem.quantity).to.eql(1);\r",
+							"})"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{bearerToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://juice-shop.herokuapp.com/rest/basket/26",
+					"protocol": "https",
+					"host": [
+						"juice-shop",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"rest",
+						"basket",
+						"26"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"auth": {
+		"type": "jwt",
+		"jwt": [
+			{
+				"key": "algorithm",
+				"value": "HS256",
+				"type": "string"
+			},
+			{
+				"key": "isSecretBase64Encoded",
+				"value": false,
+				"type": "boolean"
+			},
+			{
+				"key": "payload",
+				"value": "{}",
+				"type": "string"
+			},
+			{
+				"key": "addTokenTo",
+				"value": "header",
+				"type": "string"
+			},
+			{
+				"key": "headerPrefix",
+				"value": "Bearer",
+				"type": "string"
+			},
+			{
+				"key": "queryParamKey",
+				"value": "token",
+				"type": "string"
+			},
+			{
+				"key": "header",
+				"value": "{}",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "bearerToken",
+			"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJzdGF0dXMiOiJzdWNjZXNzIiwiZGF0YSI6eyJpZCI6NDEsInVzZXJuYW1lIjoiIiwiZW1haWwiOiJzYW1AZ21haWwuY29tIiwicGFzc3dvcmQiOiI1Y2JjZjA3ZTM2ZmUzNzE0MmI0MDdhY2UwMjExY2JmNyIsInJvbGUiOiJjdXN0b21lciIsImRlbHV4ZVRva2VuIjoiIiwibGFzdExvZ2luSXAiOiIwLjAuMC4wIiwicHJvZmlsZUltYWdlIjoiL2Fzc2V0cy9wdWJsaWMvaW1hZ2VzL3VwbG9hZHMvZGVmYXVsdC5zdmciLCJ0b3RwU2VjcmV0IjoiIiwiaXNBY3RpdmUiOnRydWUsImNyZWF0ZWRBdCI6IjIwMjMtMDQtMTIgMDU6NTQ6NDkuMjU1ICswMDowMCIsInVwZGF0ZWRBdCI6IjIwMjMtMDQtMTIgMDU6NTQ6NDkuMjU1ICswMDowMCIsImRlbGV0ZWRBdCI6bnVsbH0sImlhdCI6MTY4MTI3ODkwMiwiZXhwIjoxNjgxMjk2OTAyfQ.Fc1UZDTivdrJkYvLGs8KaTOxZ3CQidSPc8HnLCd02UFUIy22sOjRxggjj_HNU_LQ4-YZc4jmGjk4en_OZnf-DCFTTFTmt499OP1QxHzr1QuPhRz-lm_I622ebGsdcBuvlkvGWyUNkXtaR5GokecxuKIANtPTfyOStEtTcDiwjsI",
+			"type": "string"
+		}
+	]
+}
